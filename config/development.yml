@@ -1,6 +1,6 @@
 db:
   host: 'localhost'
-  username: 'user1'
+  username: 'ADB_API'
   password: 'password'
   synchronize: true
 jwt:

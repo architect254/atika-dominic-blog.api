@@ -3,14 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 
 import { AuthService } from '@core/services/auth/auth.service';
 
-import { User } from '@models/user/user.entity';
+import { User } from '@core/models/user/user.entity';
 
-import { JwtPayload } from '@models/jwt.payload';
+import { JwtPayload } from '@core/models/jwt.payload';
 
-import { SignInCredentialsDto } from '@models/auth/sign-in.dto';
-import { SignUpCredentialsDto } from '@models/auth/sign-up.dto';
+import { SignInCredentialsDto } from '@core/models/auth/sign-in.dto';
+import { SignUpCredentialsDto } from '@core/models/auth/sign-up.dto';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
   constructor(
     private authService: AuthService,

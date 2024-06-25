@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 
-import { AbstractEntity } from '@models/base-entity';
+import { AbstractEntity } from '@core/models/base-entity';
 
 @Entity('users')
 export class User extends AbstractEntity {

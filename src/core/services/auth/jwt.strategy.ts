@@ -5,9 +5,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { JwtPayload } from '@models/jwt.payload';
+import { JwtPayload } from '@core/models/jwt.payload';
 
-import { User } from '@models/user/user.entity';
+import { User } from '@core/models/user/user.entity';
 
 import * as config from 'config';
 

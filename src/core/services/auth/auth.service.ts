@@ -10,9 +10,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { compare, hash, genSalt } from 'bcrypt';
 
-import { User } from '@models/user/user.entity';
-import { SignInCredentialsDto } from '@models/auth/sign-in.dto';
-import { SignUpCredentialsDto } from '@models/auth/sign-up.dto';
+import { User } from '@core/models/user/user.entity';
+import { SignInCredentialsDto } from '@core/models/auth/sign-in.dto';
+import { SignUpCredentialsDto } from '@core/models/auth/sign-up.dto';
 
 
 @Injectable()

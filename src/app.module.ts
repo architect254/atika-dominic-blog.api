@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { typeOrmConfig } from '@core/config/typeorm.config';
 
-import { AuthModule } from '@shared/auth/auth.module';
-import { UserModule } from '@shared/user/user.module';
+import { AuthModule } from '@endpoints/auth/auth.module';
+import { UserModule } from '@endpoints/user/user.module';
 
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';

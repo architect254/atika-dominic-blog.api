@@ -19,9 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@core/*": ["core/*"],
-      "@models/*": ["models/*"],
       "@endpoints/*": ["endpoints/*"],
-      "@shared/*": ["shared/*"],
     }
   }
 }

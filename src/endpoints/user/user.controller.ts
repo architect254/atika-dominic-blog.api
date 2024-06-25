@@ -17,9 +17,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { STORAGE } from '@core/config/multer.config';
 import { UserService } from '@core/services/user/user.service';
 
-import { User } from '@models/user/user.entity';
-import { GetUser } from '@models/user/get-user.decorator';
-import { UserDto } from '@models/user/user.dto';
+import { User } from '@core/models/user/user.entity';
+import { GetUser } from '@core/models/user/get-user.decorator';
+import { UserDto } from '@core/models/user/user.dto';
 
 
 @UseGuards(AuthGuard('jwt'))
