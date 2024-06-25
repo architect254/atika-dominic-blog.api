@@ -14,13 +14,12 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { STORAGE } from '@core/config/multer.config';
-import { UserService } from '@core/services/user/user.service';
+import { configureFileStorage } from '@core/config/multer.config';
+import { GetUser } from '@core/models/get-user.decorator';
 
-import { User } from '@core/models/user/user.entity';
-import { GetUser } from '@core/models/user/get-user.decorator';
-import { UserDto } from '@core/models/user/user.dto';
-
+import { UserService } from '@endpoints/user/user.service';
+import { User } from '@endpoints/user/user.entity';
+import { UserDto } from '@endpoints/user/user.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('users')
@@ -28,15 +27,17 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('profileImage', STORAGE))
+  @UseInterceptors(
+    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
+  )
   async createUser(
-    @UploadedFile() file: any, //Express.Multer.File,
+    @UploadedFile() file: any,
     @Body() payload: UserDto,
     @GetUser() initiator: User,
   ) {
     const user: UserDto & typeof file = {
       ...payload,
-      profileImage: file.filename,
+      profile_image: file?.filename,
     };
     return await this.userService.create(user, initiator);
   }

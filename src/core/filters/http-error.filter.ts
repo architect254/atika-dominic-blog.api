@@ -11,24 +11,28 @@ export class HttpErrorFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const request = ctx.getRequest();
-    const response = ctx.getResponse();
-    const status = exception.getResponse()['statusCode'];
 
     const errorResponse = {
-      status,
       timestamp: new Date().toLocaleDateString(),
       path: request.url,
       method: request.method,
-      error: exception.getResponse()['error'],
-      message: exception.getResponse()['message'] || null,
+      name: exception.name,
+      cause: exception.cause,
+      message: exception.message,
     };
 
+    let status = 500;
+    if (exception instanceof HttpException) {
+      status = exception.getStatus();
+    }
+    errorResponse[`status`] = status;
+
     Logger.error(
-      `${errorResponse.method} -> ${errorResponse.path} || ${errorResponse.status} : ${errorResponse.error} [ ${errorResponse.message} ]`,
+      `${errorResponse.method} -> ${errorResponse.path} ${status} ${errorResponse.name} [ ${errorResponse.message} ]`,
       exception.stack,
       'HTTP_ERROR_FILTER',
     );
 
-    response.status(status).json(errorResponse);
+    ctx.getResponse().status(status).json(errorResponse);
   }
 }

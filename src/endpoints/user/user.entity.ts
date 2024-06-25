@@ -9,14 +9,17 @@ export class User extends AbstractEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ nullable: false })
+  username: string;
+
+  @Column({ nullable: false, unique: true })
   email: string;
 
   @Column({ nullable: true })
-  profileImage?: string;
+  profile_image: string;
 
   @Exclude()
   @Column()

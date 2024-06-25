@@ -3,12 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
-import { User } from '@core/models/user/user.entity';
+import { JwtStrategy } from '@core/services/jwt.strategy';
 
-import { AuthService } from '@core/services/auth/auth.service';
-import { JwtStrategy } from '@core/services/auth/jwt.strategy';
-
-import { AuthController } from './auth.controller';
+import { User } from '@endpoints/user/user.entity';
+import { AuthService } from '@endpoints/auth/auth.service';
+import { AuthController } from '@endpoints/auth/auth.controller';
 
 import * as config from 'config';
 

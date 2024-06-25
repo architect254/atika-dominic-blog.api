@@ -1,4 +1,4 @@
-import { User } from "@core/models/user/user.entity";
+import { User } from "@endpoints/user/user.entity";
 
 export interface JwtPayload {
   user: User;

@@ -10,10 +10,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { compare, hash, genSalt } from 'bcrypt';
 
-import { User } from '@core/models/user/user.entity';
-import { SignInCredentialsDto } from '@core/models/auth/sign-in.dto';
-import { SignUpCredentialsDto } from '@core/models/auth/sign-up.dto';
+import { User } from '@endpoints/user/user.entity';
 
+import { SignInCredentialsDto } from '@endpoints/auth/sign-in.dto';
+import { SignUpCredentialsDto } from '@endpoints/auth/sign-up.dto';
 
 @Injectable()
 export class AuthService {
@@ -35,7 +35,9 @@ export class AuthService {
       return await this.userRepo.save(user);
     } catch (error) {
       if (error.errno === 1062) {
-        throw new ConflictException('User Exists');
+        throw new ConflictException(
+          'user with same credentials already exists',
+        );
       } else {
         throw new InternalServerErrorException(error.message);
       }
@@ -43,17 +45,17 @@ export class AuthService {
   }
 
   async signIn(credentials: SignInCredentialsDto) {
-    const { email, password } = credentials;
-    const user = await this.userRepo.findOne({ where: { email } });
+    const { username, password } = credentials;
+    const user = await this.userRepo.findOne({ where: { username } });
 
     if (!user) {
-      throw new NotFoundException('User Not Found');
+      throw new NotFoundException('user not found');
     }
 
     const isValid = await compare(password, user.password);
 
     if (!isValid) {
-      throw new UnauthorizedException('Invalid Credentials');
+      throw new ConflictException('invalid user credentials');
     }
     return user;
   }

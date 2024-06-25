@@ -1,14 +1,21 @@
-import { Controller, UnauthorizedException, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  ConflictException,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
-import { AuthService } from '@core/services/auth/auth.service';
-
-import { User } from '@core/models/user/user.entity';
 
 import { JwtPayload } from '@core/models/jwt.payload';
 
-import { SignInCredentialsDto } from '@core/models/auth/sign-in.dto';
-import { SignUpCredentialsDto } from '@core/models/auth/sign-up.dto';
+import { User } from '@endpoints/user/user.entity';
+import { AuthService } from '@endpoints/auth/auth.service';
+import { SignInCredentialsDto } from '@endpoints/auth/sign-in.dto';
+import { SignUpCredentialsDto } from '@endpoints/auth/sign-up.dto';
+import { configureFileStorage } from '@core/config/multer.config';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 export class AuthController {
@@ -18,11 +25,19 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
+  @UseInterceptors(
+    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
+  )
   async signUp(
     @Body()
     payload: SignUpCredentialsDto,
+    @UploadedFile() file: any,
   ): Promise<User> {
-    return this.authService.signUp(payload);
+    const payloadWithProfile: SignUpCredentialsDto & typeof file = {
+      ...payload,
+      profile_image: file?.filename,
+    };
+    return this.authService.signUp(payloadWithProfile);
   }
 
   @Post('/sign-in')
@@ -32,7 +47,7 @@ export class AuthController {
   ): Promise<{ accessToken: string }> {
     const user = await this.authService.signIn(payload);
     if (!user) {
-      throw new UnauthorizedException('Invalid User Credentials');
+      throw new ConflictException('invalid user credentials');
     }
     delete user.password && delete user.salt;
     const jwtPayload: JwtPayload = { user };

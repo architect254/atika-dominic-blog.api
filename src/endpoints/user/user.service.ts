@@ -9,8 +9,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { hash, genSalt } from 'bcrypt';
 
-import { User } from '@core/models/user/user.entity';
-import { UserDto } from '@core/models/user/user.dto';
+import { User } from '@endpoints/user/user.entity';
+import { UserDto } from '@endpoints/user/user.dto';
 
 @Injectable()
 export class UserService {
@@ -26,6 +26,7 @@ export class UserService {
     Object.assign(user, credentials);
 
     user.creator = initiator;
+    user.updator = initiator;
     user.salt = await genSalt();
     user.password = await hash(password, user.salt);
 
