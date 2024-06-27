@@ -74,9 +74,9 @@ export class LoggingInterceptor implements NestInterceptor {
         Logger.log(
           `${logSignedUser(
             request.user,
-          )} ${method} -> ${url} { ${logBody(body, url)} } ( ${logQueryParams(
-            request.query,
-          )} | ${logRouteParams(request.params)} ) ${Date.now() - now}ms`,
+          )} ${method} -> ${url} { ${logBody(body, url)} } ( ${logRouteParams(
+            request.params,
+          )} | ${logQueryParams(request.query)} ) ${Date.now() - now}ms`,
           context.getClass().name,
         );
       }),

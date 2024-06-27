@@ -23,10 +23,6 @@ export class SignUpCredentialsDto extends SignInCredentialsDto {
   email: string;
 
   @IsNotEmpty()
-  @IsString()
-  profile_image: string;
-
-  @IsNotEmpty()
   @IsStrongPassword()
   password: string;
 }

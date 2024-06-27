@@ -64,6 +64,15 @@ export class UserService {
     return await this.userRepo.save(user);
   }
 
+  async uploadProfileImage(id, file, initiator: User): Promise<User> {
+    const user: User = await this.read(id);
+
+    Object.assign(user, { profile_image: file?.filename });
+    user.updator = initiator;
+
+    return await this.userRepo.save(user);
+  }
+
   async drop(id): Promise<void> {
     const user: User = await this.read(id);
     const result = await this.userRepo.remove(user);

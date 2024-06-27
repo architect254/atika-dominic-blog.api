@@ -10,9 +10,12 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFile,
+  Header,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
+
+import { File } from 'multer';
 
 import { configureFileStorage } from '@core/config/multer.config';
 import { GetUser } from '@core/models/get-user.decorator';
@@ -27,19 +30,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  @UseInterceptors(
-    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
-  )
-  async createUser(
-    @UploadedFile() file: any,
-    @Body() payload: UserDto,
-    @GetUser() initiator: User,
-  ) {
-    const user: UserDto & typeof file = {
-      ...payload,
-      profile_image: file?.filename,
-    };
-    return await this.userService.create(user, initiator);
+  async createUser(@Body() payload: UserDto, @GetUser() initiator: User) {
+    return await this.userService.create(payload, initiator);
   }
 
   @Get('/:id')
@@ -62,6 +54,19 @@ export class UserController {
     @GetUser() initiator: User,
   ) {
     return await this.userService.update(id, payload, initiator);
+  }
+
+  @Put('/profile/:id')
+  @Header(`content-type`, `multipart/form- data`)
+  @UseInterceptors(
+    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
+  )
+  async uploadProfileImage(
+    @Param('id') id,
+    @UploadedFile() file: File,
+    @GetUser() initiator: User,
+  ) {
+    return await this.userService.uploadProfileImage(id, file, initiator);
   }
 
   @Delete('/:id')

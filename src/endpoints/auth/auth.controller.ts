@@ -5,8 +5,11 @@ import {
   ConflictException,
   UploadedFile,
   UseInterceptors,
+  Header,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+
+import { File } from 'multer';
 
 import { JwtPayload } from '@core/models/jwt.payload';
 
@@ -25,19 +28,11 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
-  @UseInterceptors(
-    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
-  )
   async signUp(
     @Body()
     payload: SignUpCredentialsDto,
-    @UploadedFile() file: any,
   ): Promise<User> {
-    const payloadWithProfile: SignUpCredentialsDto & typeof file = {
-      ...payload,
-      profile_image: file?.filename,
-    };
-    return this.authService.signUp(payloadWithProfile);
+    return this.authService.signUp(payload);
   }
 
   @Post('/sign-in')
