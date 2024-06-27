@@ -8,13 +8,20 @@ import { LoggingInterceptor } from '@core/interceptors/logging.interceptor';
 
 import { AuthModule } from '@endpoints/auth/auth.module';
 import { UserModule } from '@endpoints/user/user.module';
+import { ArticleModule } from '@endpoints/article/article.module';
+import { CommentModule } from '@endpoints/comment/comment.module';
 
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
 
-
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), AuthModule, UserModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    AuthModule,
+    UserModule,
+    ArticleModule,
+    CommentModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
