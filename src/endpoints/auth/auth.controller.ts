@@ -3,13 +3,8 @@ import {
   Post,
   Body,
   ConflictException,
-  UploadedFile,
-  UseInterceptors,
-  Header,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
-import { File } from 'multer';
 
 import { JwtPayload } from '@core/models/jwt.payload';
 

@@ -12,7 +12,7 @@ export class ArticleDto {
 
   @IsString()
   @IsNotEmpty()
-  header_image: string;
+  keywords: string;
 
   @IsString()
   @IsNotEmpty()

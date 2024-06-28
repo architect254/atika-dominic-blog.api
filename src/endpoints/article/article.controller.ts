@@ -24,7 +24,7 @@ import { ArticleService } from './article.service';
 import { ArticleDto } from './article.dto';
 import { User } from '@endpoints/user/user.entity';
 
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 @Controller('articles')
 export class ArticleController {
   constructor(private articleService: ArticleService) {}
@@ -56,8 +56,7 @@ export class ArticleController {
     return await this.articleService.update(id, payload, initiator);
   }
 
-  @Put('/profile/:id')
-  @Header(`content-type`, `multipart/form- data`)
+  @Put('/:id/upload-header_image')
   @UseInterceptors(
     FileInterceptor('header_image', configureFileStorage(`header_image`)),
   )

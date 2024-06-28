@@ -14,7 +14,10 @@ export class Article extends AbstractEntity {
   summary: string;
 
   @Column({ nullable: false })
-  header_image: string;
+  keywords: string;
+
+  @Column({ nullable: true })
+  header_image?: string;
 
   @Column({ nullable: false })
   content: string;

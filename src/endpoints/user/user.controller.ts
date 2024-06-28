@@ -10,7 +10,6 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFile,
-  Header,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -56,8 +55,7 @@ export class UserController {
     return await this.userService.update(id, payload, initiator);
   }
 
-  @Put('/profile/:id')
-  @Header(`content-type`, `multipart/form- data`)
+  @Put('/:id/upload-profile_image')
   @UseInterceptors(
     FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
   )

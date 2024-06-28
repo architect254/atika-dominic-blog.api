@@ -3,7 +3,6 @@ import {
   ConflictException,
   InternalServerErrorException,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -35,7 +34,9 @@ export class AuthService {
       return await this.userRepo.save(user);
     } catch (error) {
       if (error.errno === 1062) {
-        throw new ConflictException('user with same credentials already exists');
+        throw new ConflictException(
+          'user with same credentials already exists',
+        );
       } else {
         throw new InternalServerErrorException(error.message);
       }
