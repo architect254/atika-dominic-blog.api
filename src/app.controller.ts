@@ -1,3 +1,4 @@
+import { configureFileStorage } from '@core/config/multer.config';
 import { GetUser } from '@core/models/get-user.decorator';
 import { AuthorDto } from '@endpoints/author/author.dto';
 import { AuthorService } from '@endpoints/author/author.service';
@@ -6,20 +7,39 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   Param,
   Post,
   Put,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { File } from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 export class AppController {
   constructor(private authorService: AuthorService) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  @Post('upload-article_image')
+  @UseInterceptors(
+    FileInterceptor('article_image', configureFileStorage(`artcle_image`)),
+  )
+  async uploadArticleImage() {}
+
+  // @UseGuards(AuthGuard('jwt'))
   @Post()
-  async createAuthor(@Body() payload: AuthorDto, @GetUser() initiator: User) {
+  @UseInterceptors(
+    FileInterceptor('profile_image', configureFileStorage(`profile_image`)),
+  )
+  async createAuthor(
+    @UploadedFile() file: File,
+    @Body() payload: AuthorDto,
+    @GetUser() initiator: User,
+  ) {
+    console.log(`UPLOAD`, file, payload);
     return await this.authorService.create(payload, initiator);
   }
 

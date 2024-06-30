@@ -56,18 +56,6 @@ export class ArticleController {
     return await this.articleService.update(id, payload, initiator);
   }
 
-  @Post('/:id/upload-header_image')
-  @UseInterceptors(
-    FileInterceptor('header_image', configureFileStorage(`header_image`)),
-  )
-  async uploadHeaderImage(
-    @Param('id') id,
-    @UploadedFile() file: File,
-    @GetUser() initiator: User,
-  ) {
-    return await this.articleService.uploadHeaderImage(id, file, initiator);
-  }
-
   @Delete('/:id')
   async deleteArticle(@Param('id') id) {
     await this.articleService.drop(id);

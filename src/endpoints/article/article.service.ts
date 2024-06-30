@@ -63,15 +63,6 @@ export class ArticleService {
     return await this.articleRepo.save(article);
   }
 
-  async uploadHeaderImage(id, file, initiator: User): Promise<Article> {
-    const article: Article = await this.read(id);
-
-    Object.assign(article, { header_image: file?.filename });
-    article.updator = initiator;
-
-    return await this.articleRepo.save(article);
-  }
-
   async drop(id): Promise<void> {
     const article: Article = await this.read(id);
     const result = await this.articleRepo.remove(article);
