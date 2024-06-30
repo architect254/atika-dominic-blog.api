@@ -11,7 +11,7 @@ export class Article extends AbstractEntity {
   title: string;
 
   @Column({ nullable: false })
-  summary: string;
+  description: string;
 
   @Column({ nullable: false })
   keywords: string;

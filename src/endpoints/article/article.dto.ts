@@ -8,7 +8,7 @@ export class ArticleDto {
 
   @IsString()
   @IsNotEmpty()
-  summary: string;
+  description: string;
 
   @IsString()
   @IsNotEmpty()

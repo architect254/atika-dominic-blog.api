@@ -13,6 +13,7 @@ import { CommentModule } from '@endpoints/comment/comment.module';
 
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
+import { AuthorModule } from '@endpoints/author/author.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AppService } from 'app.service';
     UserModule,
     ArticleModule,
     CommentModule,
+    AuthorModule
   ],
   controllers: [AppController],
   providers: [

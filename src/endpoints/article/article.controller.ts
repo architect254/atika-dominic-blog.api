@@ -56,7 +56,7 @@ export class ArticleController {
     return await this.articleService.update(id, payload, initiator);
   }
 
-  @Put('/:id/upload-header_image')
+  @Post('/:id/upload-header_image')
   @UseInterceptors(
     FileInterceptor('header_image', configureFileStorage(`header_image`)),
   )
