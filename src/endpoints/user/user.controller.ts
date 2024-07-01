@@ -14,8 +14,6 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { File } from 'multer';
-
 import { configureFileStorage } from '@core/config/multer.config';
 import { GetUser } from '@core/models/get-user.decorator';
 
@@ -61,7 +59,7 @@ export class UserController {
   )
   async uploadProfileImage(
     @Param('id') id,
-    @UploadedFile() file: File,
+    @UploadedFile() file: any,
     @GetUser() initiator: User,
   ) {
     return await this.userService.uploadProfileImage(id, file, initiator);

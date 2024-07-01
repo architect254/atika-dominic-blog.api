@@ -15,8 +15,6 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { File } from 'multer';
-
 import { configureFileStorage } from '@core/config/multer.config';
 import { GetUser } from '@core/models/get-user.decorator';
 

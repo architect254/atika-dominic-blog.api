@@ -1,13 +1,13 @@
-import { diskStorage, File } from 'multer';
+import { diskStorage } from 'multer';
 import { extname, join } from 'path';
 
 export const configureFileStorage = (prefix: string) => {
   return {
     storage: diskStorage({
-      destination: (req: Request, file: File, cb) => {
+      destination: (req, file: any, cb) => {
         cb(null, join(__dirname, '../../../uploads'));
       },
-      filename: (req: Request, file: File, cb) => {
+      filename: (req, file: any, cb) => {
         let fileExt = extname(file.originalname);
         cb(null, `${prefix}-${Date.now() + fileExt}`);
       },

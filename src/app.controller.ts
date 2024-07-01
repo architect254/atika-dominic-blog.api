@@ -16,7 +16,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { File } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
@@ -35,7 +34,7 @@ export class AppController {
     FileInterceptor('profile_image', configureFileStorage(`profile_image`)),
   )
   async createAuthor(
-    @UploadedFile() file: File,
+    @UploadedFile() file: any,
     @Body() payload: AuthorDto,
     @GetUser() initiator: User,
   ) {
