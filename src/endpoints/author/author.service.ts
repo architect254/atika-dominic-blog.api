@@ -52,7 +52,7 @@ export class AuthorService {
       .createQueryBuilder('author')
       .leftJoinAndSelect('author.creator', 'creator')
       .leftJoinAndSelect('author.updator', 'updator')
-      .getOne();
+      .getOneOrFail();
 
     if (!author || !Object.keys(author).length) {
       const errorMessage = `Author Not Found`;

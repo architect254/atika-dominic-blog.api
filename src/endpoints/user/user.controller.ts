@@ -53,18 +53,6 @@ export class UserController {
     return await this.userService.update(id, payload, initiator);
   }
 
-  @Put('/:id/upload-profile_image')
-  @UseInterceptors(
-    FileInterceptor('profile_image', configureFileStorage(`user_profile`)),
-  )
-  async uploadProfileImage(
-    @Param('id') id,
-    @UploadedFile() file: any,
-    @GetUser() initiator: User,
-  ) {
-    return await this.userService.uploadProfileImage(id, file, initiator);
-  }
-
   @Delete('/:id')
   async deleteUser(@Param('id') id) {
     await this.userService.drop(id);

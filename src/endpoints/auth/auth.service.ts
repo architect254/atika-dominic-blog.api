@@ -13,6 +13,7 @@ import { User } from '@endpoints/user/user.entity';
 
 import { SignInCredentialsDto } from '@endpoints/auth/sign-in.dto';
 import { SignUpCredentialsDto } from '@endpoints/auth/sign-up.dto';
+import { UserType } from '@core/models/base-entity';
 
 @Injectable()
 export class AuthService {
@@ -27,6 +28,7 @@ export class AuthService {
     const user = new User();
     Object.assign(user, credentials);
 
+    user.type = UserType.USER;
     user.salt = await genSalt();
     user.password = await this.hashPassword(password, user.salt);
 

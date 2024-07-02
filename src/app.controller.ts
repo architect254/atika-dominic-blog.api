@@ -22,23 +22,17 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class AppController {
   constructor(private authorService: AuthorService) {}
 
-  @Post('upload-article_image')
-  @UseInterceptors(
-    FileInterceptor('article_image', configureFileStorage(`artcle_image`)),
-  )
-  async uploadArticleImage() {}
-
-  // @UseGuards(AuthGuard('jwt'))
-  @Post()
+  @Post('/upload-profile_image')
   @UseInterceptors(
     FileInterceptor('profile_image', configureFileStorage(`profile_image`)),
   )
-  async createAuthor(
-    @UploadedFile() file: any,
-    @Body() payload: AuthorDto,
-    @GetUser() initiator: User,
-  ) {
-    console.log(`UPLOAD`, file, payload);
+  async uploadImage(@UploadedFile() file: any) {
+    console.log(`UPLOAD`, file);
+  }
+
+  // @UseGuards(AuthGuard('jwt'))
+  @Post()
+  async createAuthor(@Body() payload: AuthorDto, @GetUser() initiator: User) {
     return await this.authorService.create(payload, initiator);
   }
 

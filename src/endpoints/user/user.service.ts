@@ -25,10 +25,10 @@ export class UserService {
 
     Object.assign(user, credentials);
 
-    user.creator = initiator;
-    user.updator = initiator;
     user.salt = await genSalt();
     user.password = await hash(password, user.salt);
+    user.creator = initiator;
+    user.updator = initiator;
 
     return await this.save(user);
   }
@@ -59,15 +59,6 @@ export class UserService {
     const user: User = await this.read(id);
 
     Object.assign(user, payload);
-    user.updator = initiator;
-
-    return await this.userRepo.save(user);
-  }
-
-  async uploadProfileImage(id, file, initiator: User): Promise<User> {
-    const user: User = await this.read(id);
-
-    Object.assign(user, { profile_image: file?.filename });
     user.updator = initiator;
 
     return await this.userRepo.save(user);

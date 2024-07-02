@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 
-import { AbstractEntity } from '@core/models/base-entity';
+import { AbstractEntity, UserType } from '@core/models/base-entity';
 
 @Entity('users')
 export class User extends AbstractEntity {
@@ -14,6 +14,13 @@ export class User extends AbstractEntity {
 
   @Column({ nullable: false })
   username: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserType,
+    default: UserType.USER,
+  })
+  type: UserType;
 
   @Column({ nullable: false, unique: true })
   email: string;

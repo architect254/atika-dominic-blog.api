@@ -33,3 +33,7 @@ export abstract class AbstractEntity {
   @Column({ nullable: true })
   updator_id: string;
 }
+export enum UserType {
+  USER = `user`,
+  AUTHOR = `author`,
+}

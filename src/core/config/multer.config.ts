@@ -9,7 +9,7 @@ export const configureFileStorage = (prefix: string) => {
       },
       filename: (req, file: any, cb) => {
         let fileExt = extname(file.originalname);
-        cb(null, `${prefix}-${Date.now() + fileExt}`);
+        cb(null, `${file.originalname}`);
       },
     }),
   };
