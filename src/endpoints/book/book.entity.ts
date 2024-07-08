@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 import { AbstractEntity } from '@core/models/base-entity';
 
-@Entity('articles')
-export class Article extends AbstractEntity {
+@Entity('books')
+export class Book extends AbstractEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
@@ -14,11 +14,11 @@ export class Article extends AbstractEntity {
   description: string;
 
   @Column({ nullable: false })
-  keywords: string;
+  themes: string;
 
   @Column({ nullable: true })
-  header_image?: string;
+  image?: string;
 
   @Column({ nullable: false })
-  content: string;
+  cost: number;
 }

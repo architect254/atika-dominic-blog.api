@@ -14,6 +14,7 @@ import { CommentModule } from '@endpoints/comment/comment.module';
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
 import { AuthorModule } from '@endpoints/author/author.module';
+import { BookModule } from '@endpoints/book/book.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AuthorModule } from '@endpoints/author/author.module';
     UserModule,
     ArticleModule,
     CommentModule,
-    AuthorModule
+    AuthorModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [
