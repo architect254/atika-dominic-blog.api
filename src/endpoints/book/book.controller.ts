@@ -27,7 +27,7 @@ export class BookController {
   }
 
   @Get('/:id')
-  async getBook(@Param('id') id) {
+  async getBook(@Param('id') id: number) {
     return await this.bookService.read(id);
   }
 
@@ -41,7 +41,7 @@ export class BookController {
 
   @Put('/:id')
   async updateBook(
-    @Param('id') id,
+    @Param('id') id: number,
     @Body() payload: BookDto,
     @GetUser() initiator: User,
   ) {
@@ -49,7 +49,7 @@ export class BookController {
   }
 
   @Delete('/:id')
-  async deleteBook(@Param('id') id) {
+  async deleteBook(@Param('id') id: number) {
     await this.bookService.drop(id);
   }
 }

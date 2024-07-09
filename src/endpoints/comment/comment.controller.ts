@@ -31,7 +31,7 @@ export class CommentController {
   }
 
   @Get('/:id')
-  async getComment(@Param('id') id) {
+  async getComment(@Param('id') id: number) {
     return await this.commentService.read(id);
   }
 
@@ -44,7 +44,7 @@ export class CommentController {
   }
 
   @Delete('/:id')
-  async deleteComment(@Param('id') id) {
+  async deleteComment(@Param('id') id: number) {
     await this.commentService.drop(id);
   }
 }

@@ -33,7 +33,7 @@ export class ArticleController {
   }
 
   @Get('/:id')
-  async getArticle(@Param('id') id) {
+  async getArticle(@Param('id') id: number) {
     return await this.articleService.read(id);
   }
 
@@ -47,7 +47,7 @@ export class ArticleController {
 
   @Put('/:id')
   async updateArticle(
-    @Param('id') id,
+    @Param('id') id: number,
     @Body() payload: ArticleDto,
     @GetUser() initiator: User,
   ) {
@@ -55,7 +55,7 @@ export class ArticleController {
   }
 
   @Delete('/:id')
-  async deleteArticle(@Param('id') id) {
+  async deleteArticle(@Param('id') id: number) {
     await this.articleService.drop(id);
   }
 }

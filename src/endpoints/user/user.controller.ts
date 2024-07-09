@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Get('/:id')
-  async getUser(@Param('id') id) {
+  async getUser(@Param('id') id: number) {
     return await this.userService.read(id);
   }
 
@@ -46,7 +46,7 @@ export class UserController {
 
   @Put('/:id')
   async updateUser(
-    @Param('id') id,
+    @Param('id') id: number,
     @Body() payload: UserDto,
     @GetUser() initiator: User,
   ) {
@@ -54,7 +54,7 @@ export class UserController {
   }
 
   @Delete('/:id')
-  async deleteUser(@Param('id') id) {
+  async deleteUser(@Param('id') id: number) {
     await this.userService.drop(id);
   }
 }
