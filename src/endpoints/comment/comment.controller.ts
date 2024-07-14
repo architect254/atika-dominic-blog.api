@@ -20,11 +20,11 @@ import { CommentService } from './comment.service';
 import { CommentDto } from './comment.dto';
 import { User } from '@endpoints/user/user.entity';
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('comments')
 export class CommentController {
   constructor(private commentService: CommentService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createComment(@Body() payload: CommentDto, @GetUser() initiator: User) {
     return await this.commentService.create(payload, initiator);
@@ -43,6 +43,7 @@ export class CommentController {
     return await this.commentService.readAll(page, pageSize);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   async deleteComment(@Param('id') id: number) {
     await this.commentService.drop(id);

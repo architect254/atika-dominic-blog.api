@@ -16,8 +16,8 @@ export class Article extends AbstractEntity {
   @Column({ nullable: false })
   keywords: string;
 
-  @Column({ nullable: true })
-  header_image?: string;
+  @Column({ nullable: false })
+  article_image: string;
 
   @Column({ nullable: false })
   content: string;

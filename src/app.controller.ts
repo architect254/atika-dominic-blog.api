@@ -26,7 +26,15 @@ export class AppController {
   @UseInterceptors(
     FileInterceptor('profile_image', configureFileStorage(`profile_image`)),
   )
-  async uploadImage(@UploadedFile() file: any) {
+  async uploadProfileImage(@UploadedFile() file: any) {
+    console.log(`UPLOAD`, file);
+  }
+
+  @Post('/upload-article_image')
+  @UseInterceptors(
+    FileInterceptor('article_image', configureFileStorage(`article_image`)),
+  )
+  async uploadArticleImage(@UploadedFile() file: any) {
     console.log(`UPLOAD`, file);
   }
 

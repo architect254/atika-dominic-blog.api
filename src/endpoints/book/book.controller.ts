@@ -7,6 +7,7 @@ import {
   Query,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -16,11 +17,11 @@ import { BookService } from './book.service';
 import { BookDto } from './book.dto';
 import { User } from '@endpoints/user/user.entity';
 
-// @UseGuards(AuthGuard('jwt'))
 @Controller('books')
 export class BookController {
   constructor(private bookService: BookService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createBook(@Body() payload: BookDto, @GetUser() initiator: User) {
     return await this.bookService.create(payload, initiator);
@@ -39,6 +40,7 @@ export class BookController {
     return await this.bookService.readAll(page, pageSize);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
   async updateBook(
     @Param('id') id: number,
@@ -48,6 +50,7 @@ export class BookController {
     return await this.bookService.update(id, payload, initiator);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   async deleteBook(@Param('id') id: number) {
     await this.bookService.drop(id);

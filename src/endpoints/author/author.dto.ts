@@ -35,5 +35,5 @@ export class AuthorDto {
 
   @IsString()
   @IsNotEmpty()
-  youtube_profile: string;
+  whatsapp_profile: string;
 }

@@ -4,6 +4,9 @@ import { AbstractEntity } from '@core/models/base-entity';
 
 @Entity('author')
 export class Author extends AbstractEntity {
+  @PrimaryGeneratedColumn()
+  id?: number;
+
   @Column({ nullable: false })
   about_title: string;
 
@@ -14,20 +17,20 @@ export class Author extends AbstractEntity {
   profile_image: string;
 
   @Column({ nullable: false })
-  contact_title:string;
+  contact_title: string;
 
   @Column({ nullable: false })
-  contact_description:string;
+  contact_description: string;
 
   @Column({ nullable: false })
-  contact_email:string;
+  contact_email: string;
 
   @Column({ nullable: false })
-  facebook_profile:string;
+  facebook_profile: string;
 
   @Column({ nullable: false })
-  twitter_profile:string;
+  twitter_profile: string;
 
   @Column({ nullable: false })
-  youtube_profile:string;
+  whatsapp_profile: string;
 }

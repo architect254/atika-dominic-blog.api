@@ -16,5 +16,9 @@ export class ArticleDto {
 
   @IsString()
   @IsNotEmpty()
+  article_image: string;
+
+  @IsString()
+  @IsNotEmpty()
   content: string;
 }
