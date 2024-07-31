@@ -8,22 +8,28 @@ export class Author extends AbstractEntity {
   id?: number;
 
   @Column({ nullable: false })
-  about_title: string;
+  name: string;
 
   @Column({ nullable: false })
-  about_description: string;
+  nickname: string;
 
   @Column({ nullable: false })
-  profile_image: string;
+  education: string;
 
   @Column({ nullable: false })
-  contact_title: string;
+  interests: string;
 
   @Column({ nullable: false })
-  contact_description: string;
+  accomplishments: string;
 
   @Column({ nullable: false })
-  contact_email: string;
+  expertise: string;
+
+  @Column({ nullable: false })
+  residence: string;
+
+  @Column({ nullable: false })
+  about_info: string;
 
   @Column({ nullable: false })
   facebook_profile: string;

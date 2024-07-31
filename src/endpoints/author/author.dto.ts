@@ -1,39 +1,43 @@
 import { IsNotEmpty, IsString, IsEmail } from 'class-validator';
 
 export class AuthorDto {
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  about_title: string;
+  nickname: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  about_description: string;
+  education: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  profile_image: string;
+  interests: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  contact_title: string;
+  accomplishments: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  contact_description: string;
+  expertise: string;
 
-  @IsEmail()
   @IsNotEmpty()
-  contact_email: string;
-
   @IsString()
+  residence: string;
+
   @IsNotEmpty()
+  @IsString()
+  about_info: string;
+
+  @IsNotEmpty()
+  @IsString()
   facebook_profile: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   twitter_profile: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   whatsapp_profile: string;
 }
